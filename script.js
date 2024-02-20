@@ -14,6 +14,7 @@ const taskData = [];
 let currentTask = {};
 
 const addOrUpdateTask = () => {
+  addOrUpdateTaskBtn.innerText = "Add Task";
   const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
   const taskObj = {
     id: `${titleInput.value.toLowerCase().split(" ").join("-")}-${Date.now()}`,
@@ -24,8 +25,9 @@ const addOrUpdateTask = () => {
 
   if (dataArrIndex === -1) {
     taskData.unshift(taskObj);
+  } else {
+    taskData[dataArrIndex] = taskObj;
   }
-
 
   updateTaskContainer()
   reset()
@@ -89,6 +91,7 @@ openTaskFormBtn.addEventListener("click", () =>
 
 closeTaskFormBtn.addEventListener("click", () => {
   const formInputsContainValues = titleInput.value || dateInput.value || descriptionInput.value;
+
   if (formInputsContainValues) {
     confirmCloseDialog.showModal();
   } else {
